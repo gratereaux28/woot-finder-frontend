@@ -5,6 +5,9 @@ type RequestOption = {
   query?: ProductListQuery;
 };
 
+/**
+ * Returns a paginated product list using the same filter contract consumed by the frontend.
+ */
 export const get = async ({ query }: RequestOption = {}): Promise<PaginatedProducts> => {
   return requestWoot<PaginatedProducts>('/woot/products', {
     page: query?.page ?? 1,

@@ -7,6 +7,9 @@ import type { WootCategory } from '@shared/woot';
 import { WootNavbar } from './WootNavbar';
 import classes from './WootAppShell.module.css';
 
+/**
+ * Container props required to render the global app shell around the catalog.
+ */
 type WootAppShellProps = PropsWithChildren<{
   categories: WootCategory[];
   search: string;
@@ -18,6 +21,9 @@ type WootAppShellProps = PropsWithChildren<{
   onShowSoldOutChange: (value: boolean) => void;
 }>;
 
+/**
+ * Wraps the catalog UI with a header, collapsible sidebar and theme toggle.
+ */
 export function WootAppShell({
   categories,
   search,

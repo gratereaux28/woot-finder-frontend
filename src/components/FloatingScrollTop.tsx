@@ -2,6 +2,9 @@ import { ActionIcon, Affix, Transition } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
 import { IconArrowUp } from '@tabler/icons-react';
 
+/**
+ * Shows a floating action button that jumps back to the top after the user scrolls down.
+ */
 export function FloatingScrollTop() {
   const [scroll, scrollTo] = useWindowScroll();
 

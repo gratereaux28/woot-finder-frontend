@@ -1,3 +1,6 @@
+/**
+ * Root UI composition for the Woot Finder application.
+ */
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import './App.css';
@@ -12,6 +15,9 @@ import { WootAppShell } from './components/WootAppShell/WootAppShell';
 import { FloatingScrollTop } from './components/FloatingScrollTop';
 import { useWootCatalog } from './hooks/useWootCatalog';
 
+/**
+ * Connects catalog state with the shell, grid, modal and utility widgets.
+ */
 function AppContent() {
   const [selectedProduct, setSelectedProduct] = useState<WootProduct | null>(null);
   const catalog = useWootCatalog();
@@ -50,6 +56,9 @@ function AppContent() {
   );
 }
 
+/**
+ * Application entry point rendered by Modern.js.
+ */
 export default function App() {
   return (
     <MantineProvider defaultColorScheme="dark">

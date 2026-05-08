@@ -1,3 +1,6 @@
+/**
+ * Central Modern.js configuration for the frontend app and its BFF routes.
+ */
 import { appTools, defineConfig } from '@modern-js/app-tools';
 import { bffPlugin } from '@modern-js/plugin-bff';
 import { env } from 'process';

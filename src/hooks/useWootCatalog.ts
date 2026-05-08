@@ -17,6 +17,9 @@ const initialProducts: PaginatedProducts = {
   data: [],
 };
 
+/**
+ * Encapsulates all catalog state: filters, initial loading, pagination and remote errors.
+ */
 export function useWootCatalog() {
   const [products, setProducts] = useState<PaginatedProducts>(initialProducts);
   const [categories, setCategories] = useState<WootCategory[]>([]);

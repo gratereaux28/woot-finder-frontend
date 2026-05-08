@@ -1,3 +1,10 @@
+/**
+ * Shared domain contracts consumed by both the frontend and the BFF layer.
+ */
+
+/**
+ * Common pagination metadata returned by list endpoints.
+ */
 export type PaginationMeta = {
   page: number;
   limit: number;
@@ -7,6 +14,9 @@ export type PaginationMeta = {
   hasPreviousPage: boolean;
 };
 
+/**
+ * Product summary used in lists and as the base for product detail payloads.
+ */
 export type WootProduct = {
   id: string;
   offerId?: string | null;
@@ -38,6 +48,9 @@ export type WootProduct = {
   lastSeenAt?: string | null;
 };
 
+/**
+ * Filter contract supported by the product listing endpoint.
+ */
 export type ProductListQuery = {
   page?: number;
   limit?: number;
@@ -47,11 +60,17 @@ export type ProductListQuery = {
   isFeatured?: boolean;
 };
 
+/**
+ * Product list response paired with pagination metadata.
+ */
 export type PaginatedProducts = {
   meta: PaginationMeta;
   data: WootProduct[];
 };
 
+/**
+ * Feed descriptor returned by the upstream API.
+ */
 export type WootFeed = {
   id: string;
   name: string;
@@ -60,6 +79,9 @@ export type WootFeed = {
   lastSyncedAt?: string | null;
 };
 
+/**
+ * Top-level category with optional nested subcategories.
+ */
 export type WootCategory = {
   id: string;
   name: string;
@@ -68,6 +90,9 @@ export type WootCategory = {
   subcategories?: WootSubcategory[];
 };
 
+/**
+ * Subcategory metadata used for secondary navigation and filtering.
+ */
 export type WootSubcategory = {
   id: string;
   name: string;
@@ -76,6 +101,9 @@ export type WootSubcategory = {
   fullSlug: string;
 };
 
+/**
+ * Photo shape as returned by item-level detail payloads.
+ */
 export type ProductItemPhoto = {
   url?: string;
   Url?: string;
@@ -87,6 +115,9 @@ export type ProductItemPhoto = {
   Height?: number | null;
 };
 
+/**
+ * Variant or SKU level data returned for a detailed product.
+ */
 export type ProductItem = {
   id: string;
   asin?: string | null;
@@ -99,6 +130,9 @@ export type ProductItem = {
   attributeRows?: unknown[];
 };
 
+/**
+ * Extended product payload used by the detail modal.
+ */
 export type WootProductDetail = WootProduct & {
   categories?: Array<{
     category?: {

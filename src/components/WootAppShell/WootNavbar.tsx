@@ -25,6 +25,9 @@ import classes from './WootNavbar.module.css';
 
 const categoryColors = ['orange', 'blue', 'teal', 'grape', 'pink', 'green', 'cyan', 'yellow'];
 
+/**
+ * Sidebar controls for catalog navigation and filtering.
+ */
 type WootNavbarProps = {
   categories: WootCategory[];
   search: string;
@@ -36,6 +39,9 @@ type WootNavbarProps = {
   onCategoryChange: (value: string | null) => void;
 };
 
+/**
+ * Renders quick filters, category navigation and the product counter inside the app shell.
+ */
 export function WootNavbar({
   categories,
   search,

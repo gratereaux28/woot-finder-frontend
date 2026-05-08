@@ -1,5 +1,8 @@
 import type { ProductItemPhoto, WootProduct, WootProductDetail } from '@shared/woot';
 
+/**
+ * Coerces string and numeric API values into a finite number when possible.
+ */
 const numberFrom = (value?: string | number | null): number | null => {
   if (typeof value === 'number') {
     return Number.isFinite(value) ? value : null;
@@ -13,6 +16,9 @@ const numberFrom = (value?: string | number | null): number | null => {
   return null;
 };
 
+/**
+ * Formats a raw price value as USD and falls back to a generic label when missing.
+ */
 export const formatPrice = (value?: string | number | null) => {
   const amount = numberFrom(value);
   return amount === null
@@ -20,6 +26,9 @@ export const formatPrice = (value?: string | number | null) => {
     : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
 };
 
+/**
+ * Computes a discount badge when both sale and list prices are available.
+ */
 export const discountLabel = (product: WootProduct) => {
   const sale = numberFrom(product.salePriceMin);
   const list = numberFrom(product.listPriceMin);
@@ -31,15 +40,24 @@ export const discountLabel = (product: WootProduct) => {
   return `${Math.round((1 - sale / list) * 100)}% off`;
 };
 
+/**
+ * Chooses the best short description available for list and detail views.
+ */
 export const productDescription = (product: WootProduct) => {
   return product.subtitle ?? product.teaser ?? product.fullTitle ?? product.title;
 };
 
+/**
+ * Human-readable remaining time metadata used in card tooltips.
+ */
 export type TimeRemaining = {
   shortLabel: string;
   fullLabel: string;
 };
 
+/**
+ * Converts a product expiration date into short and long status labels.
+ */
 export const timeRemainingLabel = (endDate?: string | null): TimeRemaining => {
   if (!endDate) {
     return {
@@ -103,17 +121,26 @@ export const timeRemainingLabel = (endDate?: string | null): TimeRemaining => {
   };
 };
 
+/**
+ * Extracts the most specific category label available from a detailed product payload.
+ */
 export const productCategoryLabel = (product?: WootProductDetail | null) => {
   const category = product?.categories?.find(item => item.category?.fullName)?.category;
   return category?.fullName ?? category?.name ?? 'Woot deal';
 };
 
+/**
+ * Returns the first usable item-level image, falling back to the product thumbnail.
+ */
 export const firstItemPhoto = (product?: WootProductDetail | null) => {
   const photos = product?.items?.flatMap(item => item.photoRows ?? item.photos ?? []) ?? [];
   const photo = photos.find((item): item is ProductItemPhoto => Boolean(item.url ?? item.Url));
   return photo?.url ?? photo?.Url ?? product?.photoUrl ?? null;
 };
 
+/**
+ * Collects unique image URLs from the product summary and any item-level photos.
+ */
 export const productPhotos = (product?: WootProductDetail | WootProduct | null) => {
   if (!product) {
     return [];

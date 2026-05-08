@@ -5,6 +5,9 @@ import { useEffect, useRef } from 'react';
 import type { WootProduct } from '@shared/woot';
 import { ProductCard } from './ProductCard/ProductCard';
 
+/**
+ * Props required to render the product grid and trigger incremental pagination.
+ */
 type ProductGridProps = {
   products: WootProduct[];
   loading: boolean;
@@ -14,6 +17,9 @@ type ProductGridProps = {
   onSelect: (product: WootProduct) => void;
 };
 
+/**
+ * Displays the current result set and observes a sentinel element to load the next page.
+ */
 export function ProductGrid({
   products,
   loading,

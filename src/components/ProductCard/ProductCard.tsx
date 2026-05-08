@@ -21,6 +21,9 @@ import type { WootProduct } from '@shared/woot';
 import { discountLabel, formatPrice, productDescription, timeRemainingLabel } from '../../utils/product';
 import classes from './ProductCard.module.css';
 
+/**
+ * Builds the compact metadata row shown in the product card footer.
+ */
 const featureData = (product: WootProduct) => [
   {
     shortLabel: product.isFeatured ? 'Featured' : 'Woot deal',
@@ -43,11 +46,17 @@ const featureData = (product: WootProduct) => [
   },
 ];
 
+/**
+ * Summary card rendered in the catalog grid.
+ */
 type ProductCardProps = {
   product: WootProduct;
   onSelect: (product: WootProduct) => void;
 };
 
+/**
+ * Renders product highlights, pricing and navigation actions for a single deal.
+ */
 export function ProductCard({ product, onSelect }: ProductCardProps) {
   const features = featureData(product).map(feature => {
     const content = (

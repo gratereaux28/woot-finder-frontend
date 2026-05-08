@@ -1,5 +1,11 @@
+/**
+ * Shared HTTP client used by the BFF lambdas to reach the upstream Woot API.
+ */
 const API_BASE_URL = process.env.WOOT_API_BASE_URL ?? 'http://localhost:3200';
 
+/**
+ * Performs a GET request against the configured upstream API and serializes defined query params.
+ */
 export async function requestWoot<T>(path: string, query?: Record<string, unknown>): Promise<T> {
   const url = new URL(path, API_BASE_URL);
 
