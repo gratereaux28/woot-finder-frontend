@@ -1,0 +1,30 @@
+{
+  "name": "woot-finder",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "modern dev",
+    "build": "modern build",
+    "serve": "modern serve",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mantine/carousel": "^9.1.1",
+    "@mantine/core": "9.1.1",
+    "@mantine/hooks": "9.1.1",
+    "@modern-js/app-tools": "3.1.5",
+    "@modern-js/plugin-bff": "^3.1.5",
+    "@modern-js/runtime": "3.1.5",
+    "@tabler/icons-react": "3.43.0",
+    "embla-carousel-react": "^8.6.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.3",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}

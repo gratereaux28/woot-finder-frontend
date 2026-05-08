@@ -1,0 +1,19 @@
+.carousel {
+  border-radius: var(--mantine-radius-md);
+  background: transparent;
+}
+
+.slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.image {
+  background: transparent;
+}
+
+:global([data-mantine-color-scheme='dark']) .carousel {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.25), rgba(2, 6, 23, 0.2));
+}

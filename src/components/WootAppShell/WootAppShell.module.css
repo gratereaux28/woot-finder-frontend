@@ -1,0 +1,30 @@
+.title {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.headerSearch {
+  width: min(520px, 48vw);
+}
+
+.headerActions {
+  margin-left: auto;
+}
+
+:global(.mantine-AppShell-header) {
+  background: linear-gradient(90deg, #0f172a, #0f766e 55%, #f97316);
+  color: white;
+  border-bottom: 0;
+}
+
+:global([data-mantine-color-scheme='dark'] .mantine-AppShell-header) {
+  background: linear-gradient(90deg, #020617, #0f172a 55%, #164e63);
+}
+
+.headerSearch input {
+  height: 38px;
+}
+
+.headerSearch input::placeholder {
+  color: light-dark(var(--mantine-color-gray-5), #94a3b8);
+}

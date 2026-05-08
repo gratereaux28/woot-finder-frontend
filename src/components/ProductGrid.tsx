@@ -1,0 +1,83 @@
+import { Center, Loader, SimpleGrid, Stack, Text } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
+import { useEffect, useRef } from 'react';
+
+import type { WootProduct } from '@shared/woot';
+import { ProductCard } from './ProductCard/ProductCard';
+
+type ProductGridProps = {
+  products: WootProduct[];
+  loading: boolean;
+  loadingMore: boolean;
+  hasNextPage: boolean;
+  onLoadMore: () => void;
+  onSelect: (product: WootProduct) => void;
+};
+
+export function ProductGrid({
+  products,
+  loading,
+  loadingMore,
+  hasNextPage,
+  onLoadMore,
+  onSelect,
+}: ProductGridProps) {
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+
+    if (!sentinel || !hasNextPage || loading) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0]?.isIntersecting) {
+          onLoadMore();
+        }
+      },
+      { rootMargin: '520px 0px' },
+    );
+
+    observer.observe(sentinel);
+
+    return () => observer.disconnect();
+  }, [hasNextPage, loading, onLoadMore]);
+
+  if (loading) {
+    return (
+      <Center className="state-panel">
+        <Loader />
+      </Center>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <Center className="state-panel">
+        <Stack gap="xs" align="center">
+          <IconSearch size={42} stroke={1.5} />
+          <Text fw={700}>No products match this search</Text>
+          <Text c="dimmed" size="sm">
+            Try another category, subcategory, or search term.
+          </Text>
+        </Stack>
+      </Center>
+    );
+  }
+
+  return (
+    <Stack gap="lg">
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3, xl: 4 }} spacing="md">
+        {products.map(product => (
+          <ProductCard key={product.id} product={product} onSelect={onSelect} />
+        ))}
+      </SimpleGrid>
+
+      <Center ref={sentinelRef} h={56}>
+        {loadingMore ? <Loader size="sm" /> : hasNextPage ? <Text c="dimmed" size="sm">Loading more deals</Text> : null}
+      </Center>
+    </Stack>
+  );
+}
