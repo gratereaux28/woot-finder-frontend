@@ -1,4 +1,4 @@
-import { get as getProductDetail } from '@api/woot/product/[id]';
+import { get as getProductDetail } from '@api/product/[id]';
 import { Carousel } from '@mantine/carousel';
 import {
   Badge,

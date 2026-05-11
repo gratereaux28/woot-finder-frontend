@@ -148,7 +148,6 @@ export function WootNavbar({
       />
 
       <Switch
-        visibleFrom="md"
         checked={showSoldOut}
         onChange={event => onShowSoldOutChange(event.currentTarget.checked)}
         mb="sm"
@@ -190,7 +189,7 @@ export function WootNavbar({
         <div className={classes.section}>
           <Group className={classes.collectionsHeader} justify="space-between">
             <Text size="xs" fw={500} c="dimmed">
-              Collections
+              Categories
             </Text>
             <Tooltip label="Categories" withArrow position="right">
               <ActionIcon variant="default" size={18} aria-label="Categories">

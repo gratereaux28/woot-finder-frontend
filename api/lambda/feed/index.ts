@@ -1,4 +1,4 @@
-import { requestWoot } from './_client';
+import { requestWoot } from '../_client';
 import type { WootFeed } from '../../../shared/woot';
 
 /**

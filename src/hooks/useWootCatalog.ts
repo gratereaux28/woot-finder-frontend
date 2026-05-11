@@ -1,5 +1,5 @@
-import { get as getCategories } from '@api/woot/categories';
-import { get as getProducts } from '@api/woot/products';
+import { get as getCategories } from '@api/categories';
+import { get as getProducts } from '@api/product';
 import { useDebouncedValue } from '@mantine/hooks';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
