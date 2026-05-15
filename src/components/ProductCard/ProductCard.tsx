@@ -124,6 +124,11 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
               App only
             </Badge>
           ) : null}
+          {product.isSoldOut ? (
+            <Badge color="red" variant="light" className={classes.discountBadge}>
+              Sold Out
+            </Badge>
+          ) : null}
         </div>
       </Group>
 

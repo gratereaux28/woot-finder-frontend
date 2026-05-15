@@ -1,6 +1,7 @@
 import { Avatar, Group, Text, UnstyledButton } from '@mantine/core';
 
 import classes from './UserButton.module.css';
+import { IconShoppingBag } from '@tabler/icons-react';
 
 /**
  * Compact summary block shown at the top of the sidebar.
@@ -18,7 +19,7 @@ export function UserButton({ totalProducts, onResetFilters }: UserButtonProps) {
     <UnstyledButton className={classes.user} onClick={onResetFilters}>
       <Group>
         <Avatar color="blue" radius="xl">
-          WF
+          <IconShoppingBag size={24} stroke={1.7} />
         </Avatar>
 
         <div style={{ flex: 1 }}>
