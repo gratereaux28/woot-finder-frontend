@@ -1,4 +1,4 @@
-import { Badge, Container, List, Paper, SimpleGrid, Stack, Text, ThemeIcon, Title } from '@mantine/core';
+import { Badge, Container, Group, List, Paper, SimpleGrid, Stack, Text, ThemeIcon, Title } from '@mantine/core';
 import { IconDatabase, IconLock, IconRoute, IconShieldLock } from '@tabler/icons-react';
 
 import classes from './InfoPages.module.css';
@@ -12,12 +12,15 @@ export function PrivacyPage() {
       <Stack gap="xl">
         <Paper className={classes.hero}>
           <Stack gap="md">
-            <ThemeIcon radius="xl" size="lg" color="teal" variant="light">
-              <IconShieldLock size={20} stroke={1.7} />
-            </ThemeIcon>
-            <Badge color="teal" variant="light">
-              Last updated May 15, 2026
-            </Badge>
+            <Group gap="sm">
+              <ThemeIcon radius="xl" size="lg" color="teal" variant="light">
+                <IconShieldLock size={20} stroke={1.7} />
+              </ThemeIcon>
+              <Badge color="teal" variant="light">
+                Last updated May 15, 2026
+              </Badge>
+            </Group>
+
             <Title order={1}>Privacy</Title>
             <Text c="dimmed" size="lg" maw={760}>
               Woot Finder is a product search tool. It does not require user accounts, does not process payments, and
