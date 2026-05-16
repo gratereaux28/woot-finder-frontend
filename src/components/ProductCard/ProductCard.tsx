@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from '@mantine/core';
 import {
+  IconBrandAmazon,
   IconCalendar,
   IconDiscount2,
   IconExternalLink,
@@ -18,7 +19,13 @@ import {
 } from '@tabler/icons-react';
 
 import type { WootProduct } from '@shared/woot';
-import { discountLabel, formatPrice, productDescription, timeRemainingLabel } from '../../utils/product';
+import {
+  amazonProductUrl,
+  discountLabel,
+  formatPrice,
+  productDescription,
+  timeRemainingLabel,
+} from '../../utils/product';
 import classes from './ProductCard.module.css';
 
 /**
@@ -78,6 +85,7 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
   });
 
   const discount = discountLabel(product);
+  const amazonUrl = amazonProductUrl(product);
 
   return (
     <Card
@@ -143,7 +151,7 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
       </Card.Section>
 
       <Card.Section className={classes.section}>
-        <Group gap="sm" wrap="nowrap">
+        <Group gap="sm" wrap="nowrap" className={classes.actions}>
           <div>
             <Text fz="xl" fw={700} style={{ lineHeight: 1 }}>
               {formatPrice(product.salePriceMin)}
@@ -169,6 +177,22 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
               onClick={event => event.stopPropagation()}
             >
               Woot
+            </Button>
+          ) : null}
+          {amazonUrl ? (
+            <Button
+              component="a"
+              href={amazonUrl}
+              target="_blank"
+              rel="noreferrer"
+              radius="xl"
+              variant="light"
+              color="orange"
+              className={classes.externalButton}
+              rightSection={<IconBrandAmazon size={16} />}
+              onClick={event => event.stopPropagation()}
+            >
+              Amazon
             </Button>
           ) : null}
         </Group>

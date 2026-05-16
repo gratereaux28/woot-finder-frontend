@@ -102,6 +102,11 @@
   flex: 0 0 auto;
 }
 
-.wootButton {
+.actions {
+  align-items: center;
+}
+
+.wootButton,
+.externalButton {
   flex: 0 0 auto;
 }

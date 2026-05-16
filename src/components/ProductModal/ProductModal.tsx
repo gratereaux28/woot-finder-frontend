@@ -12,11 +12,12 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { IconExternalLink, IconPackage } from '@tabler/icons-react';
+import { IconBrandAmazon, IconExternalLink, IconPackage } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 
 import type { WootProduct, WootProductDetail } from '@shared/woot';
 import {
+  amazonProductUrl,
   formatPrice,
   productCategoryLabel,
   productDescription,
@@ -67,6 +68,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
 
   const currentProduct = detail ?? product;
   const photos = productPhotos(detail ?? product);
+  const amazonUrl = amazonProductUrl(currentProduct);
 
   return (
     <Modal opened={Boolean(product)} onClose={onClose} title={currentProduct?.title} size="lg" centered>
@@ -142,17 +144,32 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
             </Stack>
           ) : null}
 
-          {currentProduct.url ? (
-            <Button
-              component="a"
-              href={currentProduct.url}
-              target="_blank"
-              rel="noreferrer"
-              rightSection={<IconExternalLink size={16} />}
-            >
-              Open in Woot
-            </Button>
-          ) : null}
+          <Group grow>
+            {currentProduct.url ? (
+              <Button
+                component="a"
+                href={currentProduct.url}
+                target="_blank"
+                rel="noreferrer"
+                rightSection={<IconExternalLink size={16} />}
+              >
+                Open in Woot
+              </Button>
+            ) : null}
+            {amazonUrl ? (
+              <Button
+                component="a"
+                href={amazonUrl}
+                target="_blank"
+                rel="noreferrer"
+                color="orange"
+                variant="light"
+                rightSection={<IconBrandAmazon size={16} />}
+              >
+                Open in Amazon
+              </Button>
+            ) : null}
+          </Group>
         </Stack>
       ) : null}
     </Modal>

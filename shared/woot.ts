@@ -20,6 +20,7 @@ export type PaginationMeta = {
 export type WootProduct = {
   id: string;
   offerId?: string | null;
+  asin?: string | null;
   title: string;
   fullTitle?: string | null;
   subtitle?: string | null;

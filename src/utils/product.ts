@@ -155,3 +155,23 @@ export const productPhotos = (product?: WootProductDetail | WootProduct | null) 
 
   return [...new Set(urls)];
 };
+
+/**
+ * Finds the first ASIN available on a product summary or detailed item payload.
+ */
+export const productAsin = (product?: WootProductDetail | WootProduct | null) => {
+  if (!product) {
+    return null;
+  }
+
+  const asin = product.asin ?? ('items' in product ? product.items?.find(item => item.asin)?.asin : null);
+  return asin?.trim() || null;
+};
+
+/**
+ * Builds the Amazon product URL for a product when an ASIN is available.
+ */
+export const amazonProductUrl = (product?: WootProductDetail | WootProduct | null) => {
+  const asin = productAsin(product);
+  return asin ? `https://www.amazon.com/gp/product/${encodeURIComponent(asin)}` : null;
+};
