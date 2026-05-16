@@ -3,15 +3,15 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconMoon, IconSearch, IconShoppingBag, IconSun } from '@tabler/icons-react';
 import type { PropsWithChildren } from 'react';
 
-import type { WootCategory } from '@shared/woot';
-import { WootNavbar } from './WootNavbar';
-import classes from './WootAppShell.module.css';
+import type { Category } from '@shared/catalog';
+import { Navbar } from './Navbar';
+import classes from './CatalogAppShell.module.css';
 
 /**
  * Container props required to render the global app shell around the catalog.
  */
-type WootAppShellProps = PropsWithChildren<{
-  categories: WootCategory[];
+type CatalogAppShellProps = PropsWithChildren<{
+  categories: Category[];
   search: string;
   activeCategory: string | null;
   activePage: 'catalog' | 'about' | 'privacy';
@@ -26,7 +26,7 @@ type WootAppShellProps = PropsWithChildren<{
 /**
  * Wraps the catalog UI with a header, collapsible sidebar and theme toggle.
  */
-export function WootAppShell({
+export function CatalogAppShell({
   categories,
   search,
   activeCategory,
@@ -38,7 +38,7 @@ export function WootAppShell({
   onCategoryChange,
   onShowSoldOutChange,
   children,
-}: WootAppShellProps) {
+}: CatalogAppShellProps) {
   const [opened, { toggle, close }] = useDisclosure();
   const { colorScheme, setColorScheme } = useMantineColorScheme();
   const isDark = colorScheme === 'dark';
@@ -55,7 +55,7 @@ export function WootAppShell({
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
             <IconShoppingBag size={24} stroke={1.7} />
             <Title order={1} className={classes.title}>
-              Woot Finder
+              WootIndex
             </Title>
           </Group>
 
@@ -84,7 +84,7 @@ export function WootAppShell({
       </AppShell.Header>
 
       <AppShell.Navbar>
-        <WootNavbar
+        <Navbar
           categories={categories}
           search={search}
           activeCategory={activeCategory}

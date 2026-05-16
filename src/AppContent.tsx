@@ -1,20 +1,21 @@
 /**
- * Root UI composition for the Woot Finder application.
+ * Root UI composition for the WootIndex application.
  */
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import './App.css';
 
 import { useEffect, useState } from 'react';
-import type { WootProduct } from '@shared/woot';
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router';
+import type { Product } from '@shared/catalog';
 import faviconUrl from './assets/favicon.ico';
 import { AboutPage } from './components/InfoPages/AboutPage';
 import { PrivacyPage } from './components/InfoPages/PrivacyPage';
 import { ProductGrid } from './components/ProductGrid';
 import { ProductModal } from './components/ProductModal/ProductModal';
-import { WootAppShell } from './components/WootAppShell/WootAppShell';
+import { CatalogAppShell } from './components/AppShell/CatalogAppShell';
 import { FloatingScrollTop } from './components/FloatingScrollTop';
-import { useWootCatalog } from './hooks/useWootCatalog';
+import { useCatalog } from './hooks/useCatalog';
 
 type AppPage = 'catalog' | 'about' | 'privacy';
 
@@ -34,14 +35,14 @@ function pageFromPathname(pathname: string): AppPage {
  * Connects catalog state with the shell, grid, modal and utility widgets.
  */
 function AppContent() {
-  const [selectedProduct, setSelectedProduct] = useState<WootProduct | null>(null);
-  const [activePage, setActivePage] = useState<AppPage>(() =>
-    pageFromPathname(typeof window === 'undefined' ? '/' : window.location.pathname),
-  );
-  const catalog = useWootCatalog();
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const catalog = useCatalog();
+  const location = useLocation();
+  const routerNavigate = useNavigate();
+  const activePage = pageFromPathname(location.pathname);
 
   useEffect(() => {
-    document.title = 'WootFinder';
+    document.title = 'WootIndex';
 
     const currentIcon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
     const iconElement = currentIcon ?? document.createElement('link');
@@ -55,24 +56,11 @@ function AppContent() {
     }
   }, []);
 
-  useEffect(() => {
-    const handlePopState = () => {
-      setActivePage(pageFromPathname(window.location.pathname));
-    };
-
-    window.addEventListener('popstate', handlePopState);
-
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
   const navigate = (path: '/' | '/about' | '/privacy') => {
-    const nextPage = pageFromPathname(path);
-
-    if (window.location.pathname !== path) {
-      window.history.pushState({}, '', path);
+    if (location.pathname !== path) {
+      routerNavigate(path);
     }
 
-    setActivePage(nextPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -94,7 +82,7 @@ function AppContent() {
 
   return (
     <>
-      <WootAppShell
+      <CatalogAppShell
         categories={catalog.categories}
         search={catalog.search}
         showSoldOut={catalog.showSoldOut}
@@ -106,20 +94,25 @@ function AppContent() {
         onCategoryChange={handleCategoryChange}
         onShowSoldOutChange={catalog.setShowSoldOut}
       >
-        {activePage === 'catalog' ? (
-          <ProductGrid
-            products={catalog.products.data}
-            loading={catalog.loadingProducts}
-            loadingMore={catalog.loadingMore}
-            hasNextPage={catalog.products.meta.hasNextPage}
-            onLoadMore={catalog.loadNextPage}
-            onSelect={setSelectedProduct}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProductGrid
+                products={catalog.products.data}
+                loading={catalog.loadingProducts}
+                loadingMore={catalog.loadingMore}
+                hasNextPage={catalog.products.meta.hasNextPage}
+                onLoadMore={catalog.loadNextPage}
+                onSelect={setSelectedProduct}
+              />
+            }
           />
-        ) : null}
-
-        {activePage === 'about' ? <AboutPage /> : null}
-        {activePage === 'privacy' ? <PrivacyPage /> : null}
-      </WootAppShell>
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </CatalogAppShell>
 
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
       <FloatingScrollTop />

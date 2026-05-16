@@ -2,19 +2,19 @@ import { Center, Loader, SimpleGrid, Stack, Text } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useEffect, useRef } from 'react';
 
-import type { WootProduct } from '@shared/woot';
+import type { Product } from '@shared/catalog';
 import { ProductCard } from './ProductCard/ProductCard';
 
 /**
  * Props required to render the product grid and trigger incremental pagination.
  */
 type ProductGridProps = {
-  products: WootProduct[];
+  products: Product[];
   loading: boolean;
   loadingMore: boolean;
   hasNextPage: boolean;
   onLoadMore: () => void;
-  onSelect: (product: WootProduct) => void;
+  onSelect: (product: Product) => void;
 };
 
 /**

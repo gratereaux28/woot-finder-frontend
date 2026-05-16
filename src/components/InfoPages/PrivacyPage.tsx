@@ -23,7 +23,7 @@ export function PrivacyPage() {
 
             <Title order={1}>Privacy</Title>
             <Text c="dimmed" size="lg" maw={760}>
-              Woot Finder is a product search tool. It does not require user accounts, does not process payments, and
+              WootIndex is a product search tool. It does not require user accounts, does not process payments, and
               does not intentionally collect sensitive personal information.
             </Text>
           </Stack>
@@ -84,7 +84,7 @@ export function PrivacyPage() {
               resources directly.
             </List.Item>
             <List.Item>
-              When you open a Woot link, you leave Woot Finder and Woot&apos;s own terms and privacy practices apply.
+              When you open a Woot link, you leave WootIndex and Woot&apos;s own terms and privacy practices apply.
             </List.Item>
           </List>
         </Paper>
@@ -94,7 +94,7 @@ export function PrivacyPage() {
             Independent search tool
           </Title>
           <Text c="dimmed">
-            Woot Finder is not affiliated with, endorsed by, sponsored by, or officially connected to Woot, Amazon, or
+            WootIndex is not affiliated with, endorsed by, sponsored by, or officially connected to Woot, Amazon, or
             any of their affiliates. We are only a search tool that helps users find and preview product listings.
           </Text>
         </Paper>

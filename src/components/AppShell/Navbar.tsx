@@ -21,17 +21,17 @@ import {
 } from '@tabler/icons-react';
 import { useState } from 'react';
 
-import type { WootCategory } from '@shared/woot';
+import type { Category } from '@shared/catalog';
 import { UserButton } from './UserButton';
-import classes from './WootNavbar.module.css';
+import classes from './Navbar.module.css';
 
 const categoryColors = ['orange', 'blue', 'teal', 'grape', 'pink', 'green', 'cyan', 'yellow'];
 
 /**
  * Sidebar controls for catalog navigation and filtering.
  */
-type WootNavbarProps = {
-  categories: WootCategory[];
+type NavbarProps = {
+  categories: Category[];
   search: string;
   activeCategory: string | null;
   activePage: 'catalog' | 'about' | 'privacy';
@@ -46,7 +46,7 @@ type WootNavbarProps = {
 /**
  * Renders quick filters, category navigation and the product counter inside the app shell.
  */
-export function WootNavbar({
+export function Navbar({
   categories,
   search,
   activeCategory,
@@ -57,7 +57,7 @@ export function WootNavbar({
   onSearchChange,
   onCategoryChange,
   onShowSoldOutChange,
-}: WootNavbarProps) {
+}: NavbarProps) {
   const [openedCategories, setOpenedCategories] = useState<Record<string, boolean>>({});
 
   const handleResetFilters = () => {

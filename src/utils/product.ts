@@ -1,4 +1,4 @@
-import type { ProductItemPhoto, WootProduct, WootProductDetail } from '@shared/woot';
+import type { ProductItemPhoto, Product, ProductDetail } from '@shared/catalog';
 
 /**
  * Coerces string and numeric API values into a finite number when possible.
@@ -29,7 +29,7 @@ export const formatPrice = (value?: string | number | null) => {
 /**
  * Computes a discount badge when both sale and list prices are available.
  */
-export const discountLabel = (product: WootProduct) => {
+export const discountLabel = (product: Product) => {
   const sale = numberFrom(product.salePriceMin);
   const list = numberFrom(product.listPriceMin);
 
@@ -43,7 +43,7 @@ export const discountLabel = (product: WootProduct) => {
 /**
  * Chooses the best short description available for list and detail views.
  */
-export const productDescription = (product: WootProduct) => {
+export const productDescription = (product: Product) => {
   return product.subtitle ?? product.teaser ?? product.fullTitle ?? product.title;
 };
 
@@ -124,7 +124,7 @@ export const timeRemainingLabel = (endDate?: string | null): TimeRemaining => {
 /**
  * Extracts the most specific category label available from a detailed product payload.
  */
-export const productCategoryLabel = (product?: WootProductDetail | null) => {
+export const productCategoryLabel = (product?: ProductDetail | null) => {
   const category = product?.categories?.find(item => item.category?.fullName)?.category;
   return category?.fullName ?? category?.name ?? 'Woot deal';
 };
@@ -132,7 +132,7 @@ export const productCategoryLabel = (product?: WootProductDetail | null) => {
 /**
  * Returns the first usable item-level image, falling back to the product thumbnail.
  */
-export const firstItemPhoto = (product?: WootProductDetail | null) => {
+export const firstItemPhoto = (product?: ProductDetail | null) => {
   const photos = product?.items?.flatMap(item => item.photoRows ?? item.photos ?? []) ?? [];
   const photo = photos.find((item): item is ProductItemPhoto => Boolean(item.url ?? item.Url));
   return photo?.url ?? photo?.Url ?? product?.photoUrl ?? null;
@@ -141,7 +141,7 @@ export const firstItemPhoto = (product?: WootProductDetail | null) => {
 /**
  * Collects unique image URLs from the product summary and any item-level photos.
  */
-export const productPhotos = (product?: WootProductDetail | WootProduct | null) => {
+export const productPhotos = (product?: ProductDetail | Product | null) => {
   if (!product) {
     return [];
   }
@@ -159,7 +159,7 @@ export const productPhotos = (product?: WootProductDetail | WootProduct | null) 
 /**
  * Finds the first ASIN available on a product summary or detailed item payload.
  */
-export const productAsin = (product?: WootProductDetail | WootProduct | null) => {
+export const productAsin = (product?: ProductDetail | Product | null) => {
   if (!product) {
     return null;
   }
@@ -171,7 +171,7 @@ export const productAsin = (product?: WootProductDetail | WootProduct | null) =>
 /**
  * Builds the Amazon product URL for a product when an ASIN is available.
  */
-export const amazonProductUrl = (product?: WootProductDetail | WootProduct | null) => {
+export const amazonProductUrl = (product?: ProductDetail | Product | null) => {
   const asin = productAsin(product);
   return asin ? `https://www.amazon.com/gp/product/${encodeURIComponent(asin)}` : null;
 };

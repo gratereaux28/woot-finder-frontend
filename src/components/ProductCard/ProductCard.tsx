@@ -18,7 +18,7 @@ import {
   IconTruckDelivery,
 } from '@tabler/icons-react';
 
-import type { WootProduct } from '@shared/woot';
+import type { Product } from '@shared/catalog';
 import {
   amazonProductUrl,
   discountLabel,
@@ -31,7 +31,7 @@ import classes from './ProductCard.module.css';
 /**
  * Builds the compact metadata row shown in the product card footer.
  */
-const featureData = (product: WootProduct) => [
+const featureData = (product: Product) => [
   {
     shortLabel: product.isFeatured ? 'Featured' : 'Woot deal',
     fullLabel: undefined,
@@ -57,8 +57,8 @@ const featureData = (product: WootProduct) => [
  * Summary card rendered in the catalog grid.
  */
 type ProductCardProps = {
-  product: WootProduct;
-  onSelect: (product: WootProduct) => void;
+  product: Product;
+  onSelect: (product: Product) => void;
 };
 
 /**
@@ -172,7 +172,7 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
               rel="noreferrer"
               radius="xl"
               variant="light"
-              className={classes.wootButton}
+              className={classes.marketplaceButton}
               rightSection={<IconExternalLink size={16} />}
               onClick={event => event.stopPropagation()}
             >

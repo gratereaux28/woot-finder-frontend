@@ -1,6 +1,6 @@
-# Woot Finder
+# WootIndex
 
-Woot Finder is a web application for browsing Woot deals through a modern interface built with React and Mantine. The project uses Modern.js to serve the frontend and a BFF layer that encapsulates HTTP calls to an external API configured through environment variables.
+WootIndex is a web application for searching and browsing Woot deals through a modern interface built with React and Mantine. The project uses Modern.js to serve the frontend and a BFF layer that encapsulates HTTP calls to an external API configured through environment variables.
 
 ## Features
 
@@ -54,14 +54,14 @@ Woot Finder is a web application for browsing Woot deals through a modern interf
 The application is split into three layers:
 
 - `src/`: React UI, visual components, hooks, and presentation utilities.
-- `api/lambda/woot/`: Modern.js BFF layer that encapsulates calls to the external API.
+- `api/lambda/`: Modern.js BFF layer that encapsulates calls to the external API.
 - `shared/`: shared type contracts used by the frontend and the BFF.
 
 ### Main Flow
 
 1. `src/App.tsx` mounts the visual shell and connects catalog state to the UI.
-2. `src/hooks/useWootCatalog.ts` loads categories, fetches products, and manages pagination.
-3. `api/lambda/woot/*.ts` turns frontend calls into HTTP requests to `WOOT_API_BASE_URL`.
+2. `src/hooks/useCatalog.ts` loads categories, fetches products, and manages pagination.
+3. `api/lambda/*.ts` turns frontend calls into HTTP requests to `WOOT_API_BASE_URL`.
 4. `src/components/ProductModal/ProductModal.tsx` retrieves the full product detail on demand when a product is opened.
 5. `src/utils/product.ts` normalizes prices, descriptions, photos, and time labels.
 
@@ -69,13 +69,13 @@ The application is split into three layers:
 
 - `modern.config.ts`: server configuration and BFF plugin registration.
 - `src/App.tsx`: root application composition.
-- `src/hooks/useWootCatalog.ts`: catalog state and data-fetching logic.
+- `src/hooks/useCatalog.ts`: catalog state and data-fetching logic.
 - `src/components/ProductGrid.tsx`: results grid and infinite scroll behavior.
 - `src/components/ProductCard/ProductCard.tsx`: summary card for each product.
 - `src/components/ProductModal/ProductModal.tsx`: enriched product detail view.
-- `src/components/WootAppShell/`: shell, navbar, and sidebar summary UI.
-- `api/lambda/woot/_client.ts`: shared HTTP client for the external API.
-- `shared/woot.ts`: shared product, category, feed, and pagination types.
+- `src/components/AppShell/`: shell, navbar, and sidebar summary UI.
+- `api/lambda/_client.ts`: shared HTTP client for the external API.
+- `shared/catalog.ts`: shared product, category, feed, and pagination types.
 
 ## Expected API Contracts
 
@@ -86,10 +86,10 @@ The backend configured in `WOOT_API_BASE_URL` must respond to these routes:
 - `GET /woot/products/:id`
 - `GET /woot/feeds`
 
-The expected response types for these endpoints are documented in `shared/woot.ts`.
+The expected response types for these endpoints are documented in `shared/catalog.ts`.
 
 ## Maintenance
 
-- If you change the backend payload shape, update `shared/woot.ts` first and then adjust the UI.
-- If you add new filters, the correct entry point is `src/hooks/useWootCatalog.ts` together with the matching wrapper in `api/lambda/woot/products.ts`.
-- If you change the remote API origin, validate `.env`, `.env.example`, and `api/lambda/woot/_client.ts`.
+- If you change the backend payload shape, update `shared/catalog.ts` first and then adjust the UI.
+- If you add new filters, the correct entry point is `src/hooks/useCatalog.ts` together with the matching wrapper in `api/lambda/products.ts`.
+- If you change the remote API origin, validate `.env`, `.env.example`, and `api/lambda/_client.ts`.

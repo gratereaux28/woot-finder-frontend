@@ -17,7 +17,7 @@ export type PaginationMeta = {
 /**
  * Product summary used in lists and as the base for product detail payloads.
  */
-export type WootProduct = {
+export type Product = {
   id: string;
   offerId?: string | null;
   asin?: string | null;
@@ -66,13 +66,13 @@ export type ProductListQuery = {
  */
 export type PaginatedProducts = {
   meta: PaginationMeta;
-  data: WootProduct[];
+  data: Product[];
 };
 
 /**
  * Feed descriptor returned by the upstream API.
  */
-export type WootFeed = {
+export type Feed = {
   id: string;
   name: string;
   status: boolean;
@@ -83,18 +83,18 @@ export type WootFeed = {
 /**
  * Top-level category with optional nested subcategories.
  */
-export type WootCategory = {
+export type Category = {
   id: string;
   name: string;
   slug: string;
   description?: string | null;
-  subcategories?: WootSubcategory[];
+  subcategories?: Subcategory[];
 };
 
 /**
  * Subcategory metadata used for secondary navigation and filtering.
  */
-export type WootSubcategory = {
+export type Subcategory = {
   id: string;
   name: string;
   slug: string;
@@ -134,7 +134,7 @@ export type ProductItem = {
 /**
  * Extended product payload used by the detail modal.
  */
-export type WootProductDetail = WootProduct & {
+export type ProductDetail = Product & {
   categories?: Array<{
     category?: {
       id: string;
@@ -148,7 +148,7 @@ export type WootProductDetail = WootProduct & {
     };
   }>;
   feeds?: Array<{
-    feed?: WootFeed;
+    feed?: Feed;
   }>;
   items?: ProductItem[];
   details?: unknown;

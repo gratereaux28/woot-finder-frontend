@@ -3,7 +3,7 @@ import { get as getProducts } from '@api/product';
 import { useDebouncedValue } from '@mantine/hooks';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import type { PaginatedProducts, ProductListQuery, WootCategory } from '@shared/woot';
+import type { PaginatedProducts, ProductListQuery, Category } from '@shared/catalog';
 
 const initialProducts: PaginatedProducts = {
   meta: {
@@ -20,9 +20,9 @@ const initialProducts: PaginatedProducts = {
 /**
  * Encapsulates all catalog state: filters, initial loading, pagination and remote errors.
  */
-export function useWootCatalog() {
+export function useCatalog() {
   const [products, setProducts] = useState<PaginatedProducts>(initialProducts);
-  const [categories, setCategories] = useState<WootCategory[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [showSoldOut, setShowSoldOut] = useState(false);

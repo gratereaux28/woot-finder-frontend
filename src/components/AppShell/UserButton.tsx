@@ -24,7 +24,7 @@ export function UserButton({ totalProducts, onResetFilters }: UserButtonProps) {
 
         <div style={{ flex: 1 }}>
           <Text size="sm" fw={500}>
-            Woot Finder
+            WootIndex
           </Text>
 
           <Text c="dimmed" size="xs">

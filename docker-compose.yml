@@ -1,8 +1,8 @@
 version: "3.9"
 services:
   frontend:
-    container_name: woot-finder-frontend
-    image: 192.168.4.248:5000/woot-finder-frontend:latest
+    container_name: wootindex-frontend
+    image: 192.168.4.248:5000/wootindex-frontend:latest
     restart: always
     ports:
       - "3300:3300"

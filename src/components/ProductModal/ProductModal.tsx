@@ -15,7 +15,7 @@ import {
 import { IconBrandAmazon, IconExternalLink, IconPackage } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 
-import type { WootProduct, WootProductDetail } from '@shared/woot';
+import type { Product, ProductDetail } from '@shared/catalog';
 import {
   amazonProductUrl,
   formatPrice,
@@ -29,7 +29,7 @@ import classes from './ProductModal.module.css';
  * Input for the on-demand detail modal.
  */
 type ProductModalProps = {
-  product: WootProduct | null;
+  product: Product | null;
   onClose: () => void;
 };
 
@@ -37,7 +37,7 @@ type ProductModalProps = {
  * Fetches and displays the full detail payload for the currently selected product.
  */
 export function ProductModal({ product, onClose }: ProductModalProps) {
-  const [detail, setDetail] = useState<WootProductDetail | null>(null);
+  const [detail, setDetail] = useState<ProductDetail | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

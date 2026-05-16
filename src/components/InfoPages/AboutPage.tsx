@@ -21,9 +21,9 @@ export function AboutPage() {
               </Badge>
             </Group>
 
-            <Title order={1}>About Woot Finder</Title>
+            <Title order={1}>About WootIndex</Title>
             <Text c="dimmed" size="lg" maw={760}>
-              Woot Finder is an independent product search interface that helps you browse deals returned by our Woot
+              WootIndex is an independent product search interface that helps you browse deals returned by our Woot
               product API. It is built to make categories, prices, availability, photos, and product links easier to
               scan in one place.
             </Text>
@@ -52,7 +52,7 @@ export function AboutPage() {
               Purchases happen on Woot
             </Title>
             <Text c="dimmed" mt="xs">
-              Woot Finder does not sell products, process payments, manage orders, or provide customer support for any
+              WootIndex does not sell products, process payments, manage orders, or provide customer support for any
               purchase. External product buttons send you to Woot.
             </Text>
           </Paper>
@@ -79,7 +79,7 @@ export function AboutPage() {
             </Title>
           </Group>
           <Text c="dimmed">
-            Woot Finder is not affiliated with, endorsed by, sponsored by, or officially connected to Woot, Amazon, or
+            WootIndex is not affiliated with, endorsed by, sponsored by, or officially connected to Woot, Amazon, or
             any of their affiliates. We are only a search tool for finding and previewing products before you visit the
             official listing.
           </Text>
